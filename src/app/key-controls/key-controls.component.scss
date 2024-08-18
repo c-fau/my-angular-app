@@ -5,6 +5,7 @@ fa-icon {
   align-items: center;
   font-size: 2rem;
 }
+
 .icon-container {
   margin: 0.25rem;
   display: flex;
@@ -49,6 +50,11 @@ table {
   margin-left: 0.5rem;
   height: 1rem;
 }
+.api-table {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  height: 1rem;
+}
 .key-state-container {
   display: flex; /* Align elements horizontally */
   justify-content: space-between; /* Distribute space evenly */
@@ -65,5 +71,41 @@ table {
   }
   .state-identifier {
     width: 5rem;
+  }
+}
+p.transform-failed {
+  animation: flash-red 0.5s ease-in-out forwards !important;
+  //color: lightcoral !important;
+}
+@keyframes flash-red {
+  0% {
+    color: lightgray; /* Original color */
+  }
+  25% {
+    color: lightcoral;
+  }
+  50% {
+    color: lightgray; /* Return to original color */
+  }
+  100% {
+    color: lightcoral;
+  }
+}
+p.transform-success {
+  animation: flash-green 0.5s ease-in-out !important;
+  //color: lightcoral !important;
+}
+@keyframes flash-green {
+  0% {
+    color: lightgray; /* Original color */
+  }
+  25% {
+    color: lightgreen;
+  }
+  50% {
+    color: lightgray; /* Return to original color */
+  }
+  100% {
+    color: lightgreen;
   }
 }

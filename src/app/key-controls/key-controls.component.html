@@ -6,6 +6,8 @@
         <td>
           <div
             class="icon-container arrow"
+            (mousedown)="toggleLED('up', true)"
+            (mouseup)="toggleLED('up', false)"
             [class.transform-active]="keyStates['ArrowUp']"
           >
             <fa-icon
@@ -62,19 +64,44 @@
       </tr>
     </tbody>
   </table>
-  <table class="state-table">
-    <tbody>
-      <tr>
-        <td>
-          <div class="key-state-container">
-            <p class="state-identifier">Key states:</p>
-            <p>Up Arrow: {{ keyStates["ArrowUp"] }}</p>
-            <p>Down Arrow: {{ keyStates["ArrowDown"] }}</p>
-            <p>Left Arrow: {{ keyStates["ArrowLeft"] }}</p>
-            <p>Right Arrow: {{ keyStates["ArrowRight"] }}</p>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="states">
+    <table class="state-table">
+      <tbody>
+        <tr>
+          <td>
+            <div class="key-state-container">
+              <p class="state-identifier">Key states:</p>
+              <p>Up Arrow: {{ keyStates["ArrowUp"] }}</p>
+              <p>Down Arrow: {{ keyStates["ArrowDown"] }}</p>
+              <p>Left Arrow: {{ keyStates["ArrowLeft"] }}</p>
+              <p>Right Arrow: {{ keyStates["ArrowRight"] }}</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="api-table">
+      <tbody>
+        <tr>
+          <td>
+            <div class="key-state-container">
+              <p class="state-identifier">API states:</p>
+              <p
+                id="apiArrowUp"
+                [class.transform-success]="apiStates['ArrowUp']"
+                [class.transform-failed]="apiFailed['ArrowUp']"
+              >
+                Up Arrow: {{ apiStates["ArrowUp"] }}
+              </p>
+              <p id="apiArrowDown">Down Arrow: {{ apiStates["ArrowDown"] }}</p>
+              <p id="apiArrowLeft">Left Arrow: {{ apiStates["ArrowLeft"] }}</p>
+              <p id="apiArrowRight">
+                Right Arrow: {{ apiStates["ArrowRight"] }}
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
