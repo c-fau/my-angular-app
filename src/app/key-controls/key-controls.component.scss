@@ -1,0 +1,69 @@
+.key-controls {
+  display: flex;
+}
+fa-icon {
+  align-items: center;
+  font-size: 2rem;
+}
+.icon-container {
+  margin: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+
+  background-color: #3f3f3f;
+  border-radius: 0.5rem;
+  border-width: 0.1rem;
+  border-bottom: #3f3f3f;
+
+  border-style: solid;
+  border-color: grey;
+  //box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px;
+}
+
+.icon-container.arrow:hover {
+  transform: translateY(-0.125rem);
+}
+.icon-container.arrow:active {
+  transform: translateY(0.125rem);
+}
+
+.icon-container.transform-active.arrow {
+  transform: translateY(0.125rem);
+  background-color: #2f2f2f;
+}
+
+table {
+  background-color: #3f3f3f;
+  border-radius: 0.5rem;
+  //border-width: 0.1rem;
+  border-style: solid;
+  border-color: rgb(32, 32, 32);
+  border-top: rgb(32, 32, 32);
+  border-left: rgb(32, 32, 32);
+  border-right: rgb(32, 32, 32);
+}
+.state-table {
+  margin-left: 0.5rem;
+  height: 1rem;
+}
+.key-state-container {
+  display: flex; /* Align elements horizontally */
+  justify-content: space-between; /* Distribute space evenly */
+  align-items: center; /* Align items vertically in the center */
+  width: 100%; /* Make container span full width */
+  padding: 0.25rem;
+  box-sizing: border-box;
+  p {
+    width: 150px; /* Fixed width for each <p> element */
+    margin: 0 10px; /* Space between <p> elements */
+    text-align: left; /* Center text inside <p> */
+    font-weight: bold;
+    color: lightgray;
+  }
+  .state-identifier {
+    width: 5rem;
+  }
+}

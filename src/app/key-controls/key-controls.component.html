@@ -1,0 +1,80 @@
+<div class="key-controls">
+  <table class="arrows-table">
+    <tbody>
+      <tr>
+        <td></td>
+        <td>
+          <div
+            class="icon-container arrow"
+            [class.transform-active]="keyStates['ArrowUp']"
+          >
+            <fa-icon
+              id="ArrowUp"
+              [icon]="faArrowUp"
+              [style]="{ color: iconColours.up }"
+            >
+            </fa-icon>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div
+            class="icon-container arrow"
+            [class.transform-active]="keyStates['ArrowLeft']"
+          >
+            <fa-icon
+              id="ArrowLeft"
+              [icon]="faArrowLeft"
+              [style]="{ color: iconColours.left }"
+            >
+            </fa-icon>
+          </div>
+        </td>
+        <td>
+          <div
+            class="icon-container arrow"
+            [class.transform-active]="keyStates['ArrowDown']"
+          >
+            <fa-icon
+              id="ArrowDown arrow"
+              [icon]="faArrowDown"
+              [style]="{ color: iconColours.down }"
+            >
+            </fa-icon>
+          </div>
+        </td>
+
+        <td>
+          <div
+            class="icon-container arrow"
+            [class.transform-active]="keyStates['ArrowRight']"
+          >
+            <fa-icon
+              id="ArrowRight"
+              [icon]="faArrowRight"
+              [style]="{ color: iconColours.right }"
+            >
+            </fa-icon>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="state-table">
+    <tbody>
+      <tr>
+        <td>
+          <div class="key-state-container">
+            <p class="state-identifier">Key states:</p>
+            <p>Up Arrow: {{ keyStates["ArrowUp"] }}</p>
+            <p>Down Arrow: {{ keyStates["ArrowDown"] }}</p>
+            <p>Left Arrow: {{ keyStates["ArrowLeft"] }}</p>
+            <p>Right Arrow: {{ keyStates["ArrowRight"] }}</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
