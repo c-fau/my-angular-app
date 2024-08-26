@@ -1,0 +1,80 @@
+.wheel-controller {
+  position: relative;
+
+  justify-content: center;
+  align-items: center;
+  width: 38.5rem;
+  //height: 3rem;
+
+  background-color: #3f3f3f;
+  border-radius: 0.5rem;
+  border-width: 0.1rem;
+  border-bottom: #3f3f3f;
+
+  border-style: solid;
+  border-color: grey;
+}
+#connectButtons {
+  display: flex;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+.wheel-states {
+  display: flex;
+  gap: 5%;
+  padding-left: 0.5rem;
+  width: 100%;
+  p {
+    margin-top: 0;
+    margin-bottom: 0.125rem;
+
+    color: lightgrey;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+}
+.slider {
+  accent-color: lightgreen;
+  cursor: pointer;
+}
+
+.item {
+  color: lightgrey;
+  font-weight: bold;
+  font-size: 0.9rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 2.5rem;
+
+  background-color: #3f3f3f;
+  border-radius: 0.5rem;
+  border-width: 0.1rem;
+  border-bottom: #3f3f3f;
+
+  border-style: solid;
+  border-color: grey;
+  //box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px;
+}
+#sliders {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.item.sliders {
+  width: 18rem !important;
+  p {
+    width: 9rem;
+    text-align: left;
+  }
+}
+
+button:hover {
+  transform: translateY(-0.125rem);
+}
+button:active {
+  transform: translateY(0.125rem);
+  background-color: #2f2f2f;
+}

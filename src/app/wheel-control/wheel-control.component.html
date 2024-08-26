@@ -1,0 +1,69 @@
+<div class="wheel-controller">
+  <div class="buttons">
+    <div id="connectButtons">
+      <button
+        class="item"
+        (click)="connect()"
+        [ngStyle]="{
+          color: carControlService.connectedToWheel
+            ? 'lightgreen'
+            : 'lightcoral'
+        }"
+      >
+        Connect to G29
+      </button>
+      <button
+        class="item"
+        (click)="startReadingData()"
+        [ngStyle]="{
+          color: carControlService.readingData ? 'lightgreen' : 'lightcoral'
+        }"
+      >
+        Read Data
+      </button>
+      <button class="item" (click)="disconnect()">Disconnect</button>
+    </div>
+
+    <div class="wheel-states"></div>
+    <div id="sliders">
+      <div id="rangeButtons" class="item sliders">
+        <!--
+      <button (click)="setRange(0)">Set range to 0</button>
+      <button (click)="setRange(90)">Set range to 90</button>
+      <button (click)="setRange(180)">Set range to 180</button>
+      -->
+        <p>Wheel range: {{ wheelRange }}°</p>
+        <input
+          id="wheelRangeSlider"
+          type="range"
+          min="0"
+          max="900"
+          step="90"
+          [value]="wheelRange"
+          (input)="onWheelRangeSliderChange($event)"
+          class="slider"
+        />
+      </div>
+      <div id="autoCenterButtons">
+        <!--
+      <button (click)="activateForcefeedback()">Activate force feedback</button>
+      <button (click)="deactivateForcefeedback()">
+        Deactivate force feedback
+      </button>
+      --></div>
+      <div id="forceFeedbackButtons" class="item sliders">
+        <p>Force feedback: {{ forceFeedback * 100 }}%</p>
+        <input
+          id="wheelRangeSlider"
+          type="range"
+          min="0"
+          max="1"
+          step="0.05"
+          [value]="forceFeedback"
+          (input)="onForceFeedbackSliderChange($event)"
+          class="slider"
+        />
+      </div>
+    </div>
+  </div>
+</div>

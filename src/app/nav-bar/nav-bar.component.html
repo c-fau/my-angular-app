@@ -1,10 +1,10 @@
 <div class="nav-bar">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 982 239"
-      fill="none"
-      class="angular-logo"
-    >
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 982 239"
+    fill="none"
+    class="angular-logo"
+  >
     <a href="/">
       <g clip-path="url(#a)">
         <path
@@ -44,20 +44,18 @@
         </linearGradient>
         <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
       </defs>
-      </a>
-    </svg>
-    <div class="pill-group">
-      @for (item of [
-        { title: 'Explore the Docs', link: 'https://angular.dev' },
-        { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-        { title: 'Controls Page', link: '/key-controls' },
-        { title: 'Test Page', link: '/test' },
-      ]; track item.title) {
-        <a
-          class="pill" [href]="item.link" rel="noopener">
-          <span>{{ item.title }}</span>
-        </a>
-      }
+    </a>
+  </svg>
+  <div class="pill-group">
+    @for (item of [ { title: 'Explore the Docs', link: 'https://angular.dev' },
+    { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' }, {
+    title: 'Controls Page', link: '/key-controls' }, { title: 'Test Page', link:
+    '/test' } , { title: 'Wheel Page', link: '/wheel-control' }, ]; track
+    item.title) {
+    <a class="pill" [href]="item.link" rel="noopener">
+      <span>{{ item.title }}</span>
+    </a>
+    }
   </div>
-    <div class="divider" role="separator" aria-label="Divider"></div>
+  <div class="divider" role="separator" aria-label="Divider"></div>
 </div>

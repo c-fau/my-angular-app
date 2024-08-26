@@ -1,0 +1,50 @@
+<div class="slider-container">
+  <div class="value-display">{{ steering.value }}</div>
+  <div class="slider-bar">
+    <div
+      class="slider-track"
+      id="sliderBar"
+      [class.rightStyle]="sliderGreaterThanZero()"
+      [class.leftStyle]="sliderLessThanZero()"
+      [ngStyle]="{ '--slider-value': trackValue(steering) }"
+    ></div>
+    <input
+      id="steering"
+      type="range"
+      min="{{ steering.min }}"
+      max="{{ steering.max }}"
+      step="{{ steering.step }}"
+      [(ngModel)]="steering.value"
+      class="slider"
+    />
+  </div>
+</div>
+<div class="slider-group">
+  <div class="slider-bar-vertical">
+    <div class="slider-track-vertical"></div>
+    <input
+      id="gas"
+      type="range"
+      min="{{ gas.min }}"
+      max="{{ gas.max }}"
+      step="{{ gas.step }}"
+      [(ngModel)]="gas.value"
+      class="slider-pedal"
+      [ngStyle]="{ '--slider-value': trackValue(gas) }"
+    />
+  </div>
+
+  <div class="slider-bar-vertical">
+    <div class="slider-track-vertical"></div>
+    <input
+      id="brake"
+      type="range"
+      min="{{ brake.min }}"
+      max="{{ brake.max }}"
+      step="{{ brake.step }}"
+      [(ngModel)]="brake.value"
+      class="slider-pedal"
+      [ngStyle]="{ '--slider-value': trackValue(brake) }"
+    />
+  </div>
+</div>

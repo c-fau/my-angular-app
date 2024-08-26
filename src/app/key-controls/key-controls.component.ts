@@ -1,5 +1,9 @@
 import { Component, HostListener } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SliderComponent } from '../slider/slider.component';
+import { WheelControlComponent } from '../wheel-control/wheel-control.component';
+import { HidService } from '../services/hid-service.service';
+
 import {
   faArrowUp,
   faArrowDown,
@@ -12,13 +16,18 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-key-controls',
   standalone: true,
-  imports: [FontAwesomeModule, HttpClientModule],
-  providers: [LedService],
+  imports: [
+    FontAwesomeModule,
+    HttpClientModule,
+    SliderComponent,
+    WheelControlComponent,
+  ],
+  providers: [LedService, HidService],
   templateUrl: './key-controls.component.html',
   styleUrl: './key-controls.component.scss',
 })
 export class KeyControlsComponent {
-  constructor(private LedService: LedService) {}
+  constructor(private LedService: LedService, private HidService: HidService) {}
 
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
@@ -55,6 +64,40 @@ export class KeyControlsComponent {
     ArrowRight: false,
   };
 
+  steering = {
+    min: -30,
+    max: 30,
+    step: 1,
+    value: 0,
+  };
+  gas = {
+    min: 0,
+    max: 100,
+    step: 1,
+    value: 0,
+  };
+  brake = {
+    min: 0,
+    max: 100,
+    step: 1,
+    value: 0,
+  };
+
+  ngOnInit() {
+    this.HidService.wheelPosition$.subscribe((position) => {
+      this.steering.value = this.ensureNumber(position);
+    });
+    this.HidService.gasPosition$.subscribe((position) => {
+      this.gas.value = this.ensureNumber(position);
+    });
+    this.HidService.brakePosition$.subscribe((position) => {
+      this.brake.value = this.ensureNumber(position);
+    });
+  }
+  private ensureNumber(value: any): number {
+    return typeof value === 'number' ? value : 0; // Default to 0 if value is not a number
+  }
+
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     switch (event.key) {
@@ -65,6 +108,17 @@ export class KeyControlsComponent {
         this.keyStates['ArrowUp'] = true;
         this.iconColours.up = this.activeColour;
         this.applyTransform('ArrowUp');
+        if (
+          (this.brake.value > 0 && this.keyStates['ArrowUp']) ||
+          (this.gas.value >= 1 && this.gas.value <= 99) ||
+          (this.keyStates['ArrowDown'] && this.keyStates['ArrowUp']) ||
+          this.keyStates['ArrowDown']
+        ) {
+          this.gas.value = 0;
+          this.brake.value = 0;
+        } else {
+          this.gas.value = 100;
+        }
         //console.log(event.key);
         //console.log(this.keyStates);
 
@@ -75,6 +129,18 @@ export class KeyControlsComponent {
         }
         this.keyStates['ArrowDown'] = true;
         this.iconColours.down = this.activeColour;
+        if (
+          (this.gas.value > 0 && this.keyStates['ArrowDown']) ||
+          (this.brake.value >= 1 && this.brake.value <= 99) ||
+          (this.keyStates['ArrowDown'] && this.keyStates['ArrowUp']) ||
+          this.keyStates['ArrowUp']
+        ) {
+          this.brake.value = 0;
+          this.gas.value = 0;
+        } else {
+          this.brake.value = 100;
+        }
+
         //console.log(event.key);
 
         break;
@@ -84,6 +150,11 @@ export class KeyControlsComponent {
         }
         this.keyStates['ArrowLeft'] = true;
         this.iconColours.left = this.activeColour;
+        if (this.keyStates['ArrowLeft'] && this.keyStates['ArrowRight']) {
+          this.steering.value = 0;
+        } else {
+          this.steering.value = -30;
+        }
 
         //console.log(event.key);
 
@@ -94,7 +165,11 @@ export class KeyControlsComponent {
         }
         this.keyStates['ArrowRight'] = true;
         this.iconColours.right = this.activeColour;
-
+        if (this.keyStates['ArrowLeft'] && this.keyStates['ArrowRight']) {
+          this.steering.value = 0;
+        } else {
+          this.steering.value = 30;
+        }
         //console.log(event.key);
 
         break;
@@ -109,6 +184,7 @@ export class KeyControlsComponent {
         //console.log(event.key);
         //console.log(this.keyStates);
         this.toggleLED('up', false);
+        this.gas.value = 0;
 
         break;
       case 'ArrowDown':
@@ -116,6 +192,7 @@ export class KeyControlsComponent {
         //console.log(event.key);
         this.iconColours.down = this.defaultColour;
         this.toggleLED('down', false);
+        this.brake.value = 0;
 
         break;
       case 'ArrowLeft':
@@ -123,6 +200,7 @@ export class KeyControlsComponent {
         //console.log(event.key);
         this.iconColours.left = this.defaultColour;
         this.toggleLED('left', false);
+        this.steering.value = 0;
 
         break;
       case 'ArrowRight':
@@ -130,6 +208,7 @@ export class KeyControlsComponent {
         //console.log(event.key);
         this.iconColours.right = this.defaultColour;
         this.toggleLED('right', false);
+        this.steering.value = 0;
 
         break;
     }
