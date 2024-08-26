@@ -77,23 +77,27 @@ export class KeyControlsComponent {
     value: 0,
   };
   brake = {
-    min: 0,
-    max: 100,
-    step: 1,
+    min: -100,
+    max: 0,
+    step: -1,
     value: 0,
   };
 
   ngOnInit() {
-    this.HidService.wheelPosition$.subscribe((position) => {
-      this.steering.value = this.ensureNumber(position);
+    this.HidService.wheelPosition$.subscribe(() => {});
+    this.HidService.gasPosition$.subscribe(() => {});
+    this.HidService.brakePosition$.subscribe(() => {});
+    this.HidService.wheelPositionUI$.subscribe((position) => {
+      this.steering.value = position;
     });
-    this.HidService.gasPosition$.subscribe((position) => {
-      this.gas.value = this.ensureNumber(position);
+    this.HidService.gasPositionUI$.subscribe((position) => {
+      this.gas.value = position;
     });
-    this.HidService.brakePosition$.subscribe((position) => {
-      this.brake.value = this.ensureNumber(position);
+    this.HidService.brakePositionUI$.subscribe((position) => {
+      this.brake.value = position;
     });
   }
+
   private ensureNumber(value: any): number {
     return typeof value === 'number' ? value : 0; // Default to 0 if value is not a number
   }

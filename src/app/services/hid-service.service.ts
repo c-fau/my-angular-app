@@ -30,6 +30,15 @@ export class HidService {
     switchMap((value) => this.sendToApi('motor', value))
   );
 
+  private wheelPositionSubjectUI = new BehaviorSubject<number>(0);
+  public wheelPositionUI$ = this.wheelPositionSubjectUI.asObservable();
+
+  private gasPositionSubjectUI = new BehaviorSubject<number>(0);
+  public gasPositionUI$ = this.gasPositionSubjectUI.asObservable();
+
+  private brakePositionSubjectUI = new BehaviorSubject<number>(0);
+  public brakePositionUI$ = this.brakePositionSubjectUI.asObservable();
+
   constructor(private http: HttpClient) {}
 
   private sendToApi(type: string, value: number) {
@@ -45,12 +54,15 @@ export class HidService {
 
   updateWheelPosition(newPosition: number) {
     this.wheelPositionSubject.next(newPosition);
+    this.wheelPositionSubjectUI.next(newPosition);
   }
   updateGasPosition(newPosition: number) {
     this.gasPositionSubject.next(newPosition);
+    this.gasPositionSubjectUI.next(newPosition);
   }
   updateBrakePosition(newPosition: number) {
     this.brakePositionSubject.next(newPosition);
+    this.brakePositionSubjectUI.next(newPosition);
   }
 
   // Optional: method to get the current wheelPosition synchronously
@@ -105,7 +117,7 @@ export class HidService {
 
         this.updateWheelPosition(Math.round(normalizedWheelRotation));
         this.updateGasPosition(Math.round(nomalizedGasPosition));
-        this.updateBrakePosition(Math.round(normalizedBrakePosition));
+        this.updateBrakePosition(Math.round(-normalizedBrakePosition));
 
         //console.log('Raw Wheel Rotation:', wheelRotation);
         //console.log('Normalized Wheel Rotation:', normalizedWheelRotation);

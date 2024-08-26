@@ -38,7 +38,7 @@
 }
 
 /* Slider itself */
-.slider-pedal {
+.slider-pedal#brake {
   position: absolute;
   width: 10rem;
   height: 3rem;
@@ -57,6 +57,28 @@
   background: linear-gradient(
     to right,
     lightgreen calc(0% + var(--slider-value)),
+    grey 0%
+  );
+}
+.slider-pedal#gas {
+  position: absolute;
+  width: 10rem;
+  height: 3rem;
+  background: transparent;
+  border-radius: 5px;
+  border-color: transparent;
+  /* Remove default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border: 0px;
+  padding-inline: 0px;
+  padding-block: 0px;
+  margin: 0px;
+  background: linear-gradient(
+    to left,
+    lightcoral calc(0% - var(--slider-value)),
     grey 0%
   );
 }
