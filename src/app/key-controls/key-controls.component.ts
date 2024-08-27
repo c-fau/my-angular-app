@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { LedService } from '../services/led-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CamFeedComponent } from '../cam-feed/cam-feed.component';
 
 @Component({
   selector: 'app-key-controls',
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     SliderComponent,
     WheelControlComponent,
+    CamFeedComponent,
   ],
   providers: [LedService, HidService],
   templateUrl: './key-controls.component.html',
@@ -87,6 +89,7 @@ export class KeyControlsComponent {
     this.HidService.wheelPosition$.subscribe(() => {});
     this.HidService.gasPosition$.subscribe(() => {});
     this.HidService.brakePosition$.subscribe(() => {});
+
     this.HidService.wheelPositionUI$.subscribe((position) => {
       this.steering.value = position;
     });

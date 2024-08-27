@@ -1,69 +1,72 @@
-<div class="key-controls">
-  <table class="arrows-table">
-    <tbody>
-      <tr>
-        <td></td>
-        <td>
-          <div
-            class="icon-container arrow"
-            (mousedown)="toggleLED('up', true)"
-            (mouseup)="toggleLED('up', false)"
-            [class.transform-active]="keyStates['ArrowUp']"
-          >
-            <fa-icon
-              id="ArrowUp"
-              [icon]="faArrowUp"
-              [style]="{ color: iconColours.up }"
+<app-cam-feed></app-cam-feed>
+<div class="keysAndWheel">
+  <div class="key-controls">
+    <table class="arrows-table">
+      <tbody>
+        <tr>
+          <td></td>
+          <td>
+            <div
+              class="icon-container arrow"
+              (mousedown)="toggleLED('up', true)"
+              (mouseup)="toggleLED('up', false)"
+              [class.transform-active]="keyStates['ArrowUp']"
             >
-            </fa-icon>
-          </div>
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>
-          <div
-            class="icon-container arrow"
-            [class.transform-active]="keyStates['ArrowLeft']"
-          >
-            <fa-icon
-              id="ArrowLeft"
-              [icon]="faArrowLeft"
-              [style]="{ color: iconColours.left }"
+              <fa-icon
+                id="ArrowUp"
+                [icon]="faArrowUp"
+                [style]="{ color: iconColours.up }"
+              >
+              </fa-icon>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <div
+              class="icon-container arrow"
+              [class.transform-active]="keyStates['ArrowLeft']"
             >
-            </fa-icon>
-          </div>
-        </td>
-        <td>
-          <div
-            class="icon-container arrow"
-            [class.transform-active]="keyStates['ArrowDown']"
-          >
-            <fa-icon
-              id="ArrowDown arrow"
-              [icon]="faArrowDown"
-              [style]="{ color: iconColours.down }"
+              <fa-icon
+                id="ArrowLeft"
+                [icon]="faArrowLeft"
+                [style]="{ color: iconColours.left }"
+              >
+              </fa-icon>
+            </div>
+          </td>
+          <td>
+            <div
+              class="icon-container arrow"
+              [class.transform-active]="keyStates['ArrowDown']"
             >
-            </fa-icon>
-          </div>
-        </td>
+              <fa-icon
+                id="ArrowDown arrow"
+                [icon]="faArrowDown"
+                [style]="{ color: iconColours.down }"
+              >
+              </fa-icon>
+            </div>
+          </td>
 
-        <td>
-          <div
-            class="icon-container arrow"
-            [class.transform-active]="keyStates['ArrowRight']"
-          >
-            <fa-icon
-              id="ArrowRight"
-              [icon]="faArrowRight"
-              [style]="{ color: iconColours.right }"
+          <td>
+            <div
+              class="icon-container arrow"
+              [class.transform-active]="keyStates['ArrowRight']"
             >
-            </fa-icon>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+              <fa-icon
+                id="ArrowRight"
+                [icon]="faArrowRight"
+                [style]="{ color: iconColours.right }"
+              >
+              </fa-icon>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!--
   <div class="states">
     <table class="state-table">
       <tbody>
@@ -103,7 +106,8 @@
         </tr>
       </tbody>
     </table>
+  </div> -->
   </div>
+  <app-wheel-control></app-wheel-control>
 </div>
-<app-wheel-control></app-wheel-control>
 <app-slider [steering]="steering" [gas]="brake" [brake]="gas"></app-slider>

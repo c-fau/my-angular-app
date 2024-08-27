@@ -39,17 +39,13 @@ export class HidService {
   private brakePositionSubjectUI = new BehaviorSubject<number>(0);
   public brakePositionUI$ = this.brakePositionSubjectUI.asObservable();
 
-  constructor(private http: HttpClient) {}
-
   private sendToApi(type: string, value: number) {
-    return this.http
-      .post(`http://raspberrypi:8000/car/${type}`, { value })
-      .pipe(
-        catchError((error) => {
-          console.error('API call failed', error);
-          return of(null); // Return an empty observable in case of error
-        })
-      );
+    return this.http.post(`http://pitwo:8000/car/${type}`, { value }).pipe(
+      catchError((error) => {
+        console.error('API call failed', error);
+        return of(null); // Return an empty observable in case of error
+      })
+    );
   }
 
   updateWheelPosition(newPosition: number) {
@@ -64,6 +60,7 @@ export class HidService {
     this.brakePositionSubject.next(newPosition);
     this.brakePositionSubjectUI.next(newPosition);
   }
+  constructor(private http: HttpClient) {}
 
   // Optional: method to get the current wheelPosition synchronously
   get wheelPosition(): number {
@@ -83,12 +80,16 @@ export class HidService {
       });
 
       if (devices.length > 0) {
-        this.device = devices[0];
-        await this.device.open();
-        console.log('G29 connected:', this.device);
-        this.connectedToWheel = true;
-        this.setForcefeedback(forceFeedback);
-        this.setRange(wheelRange);
+        try {
+          this.device = devices[0];
+          await this.device.open();
+          console.log('G29 connected:', this.device);
+          this.connectedToWheel = true;
+          this.setForcefeedback(forceFeedback);
+          this.setRange(wheelRange);
+        } catch (e) {
+          console.log('error:: ', e);
+        }
       }
     } else {
       console.error('WebHID is not supported by your browser.');
